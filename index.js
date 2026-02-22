@@ -9,6 +9,12 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
+
+// Status check
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Instagram Downloader API is running' });
+});
 
 // Helper function to extract media using multiple libraries
 async function extractMedia(url) {
@@ -133,10 +139,16 @@ app.get('/api/proxy', async (req, res) => {
             console.error('Status:', error.response.status);
             res.status(error.response.status).send(`Failed to fetch media from Instagram (Status: ${error.response.status})`);
         } else {
-            res.status(500).send('Failed to connect to media server');
+            res.status(500).send(`Failed to connect to media server: ${error.message}`);
         }
     }
 });
+
+// Root handler for the /api route itself
+app.get('/api', (req, res) => {
+    res.json({ message: 'Welcome to the InstaSnap API. Use /api/download and /api/proxy' });
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

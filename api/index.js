@@ -59,8 +59,13 @@ async function extractMedia(url) {
     throw new Error(`All extraction methods failed. ${errors.join(' | ')}`);
 }
 
+// Status check
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', message: 'Instagram Downloader API is running' });
+});
+
 // API route to get Instagram media
-app.post(['/api/download', '/download'], async (req, res) => {
+app.post('/api/download', async (req, res) => {
     const { url } = req.body;
 
     if (!url) {
@@ -85,7 +90,7 @@ app.post(['/api/download', '/download'], async (req, res) => {
 });
 
 // Proxy endpoint to bypass CORS and referer checks
-app.get(['/api/proxy', '/proxy'], async (req, res) => {
+app.get('/api/proxy', async (req, res) => {
     const { url, dl } = req.query;
     if (!url) return res.status(400).send('URL is required');
 
@@ -131,9 +136,15 @@ app.get(['/api/proxy', '/proxy'], async (req, res) => {
             console.error('Status:', error.response.status);
             res.status(error.response.status).send(`Failed to fetch media from Instagram (Status: ${error.response.status})`);
         } else {
-            res.status(500).send('Failed to connect to media server');
+            res.status(500).send(`Failed to connect to media server: ${error.message}`);
         }
     }
 });
+
+// Root handler for the /api route itself
+app.get('/api', (req, res) => {
+    res.json({ message: 'Welcome to the InstaSnap API. Use /api/download and /api/proxy' });
+});
+
 
 module.exports = app;

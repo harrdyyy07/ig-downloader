@@ -399,13 +399,14 @@
                 previewBtn.href = proxiedUrl;
                 previewBtn.target = '_blank';
                 previewBtn.className = 'card-btn btn-preview';
-                previewBtn.innerText = 'Preview Full';
+                previewBtn.innerHTML = '<span style="margin-right: 5px;">👁️</span> Preview Full';
 
                 const downloadBtn = document.createElement('a');
                 // Use proxy with dl=1 to trigger direct download
                 downloadBtn.href = `${proxiedUrl}&dl=1`;
                 downloadBtn.className = 'card-btn btn-action-download';
-                downloadBtn.innerText = 'Download Now';
+                downloadBtn.download = `instagram_media_${Date.now()}`;
+                downloadBtn.innerHTML = '<span style="margin-right: 5px;">⬇️</span> Download Now';
 
                 actionsDiv.appendChild(previewBtn);
                 actionsDiv.appendChild(downloadBtn);
