@@ -60,7 +60,7 @@ async function extractMedia(url) {
 }
 
 // API route to get Instagram media
-app.post('/api/download', async (req, res) => {
+app.post(['/api/download', '/download'], async (req, res) => {
     const { url } = req.body;
 
     if (!url) {
@@ -85,7 +85,7 @@ app.post('/api/download', async (req, res) => {
 });
 
 // Proxy endpoint to bypass CORS and referer checks
-app.get('/api/proxy', async (req, res) => {
+app.get(['/api/proxy', '/proxy'], async (req, res) => {
     const { url, dl } = req.query;
     if (!url) return res.status(400).send('URL is required');
 
