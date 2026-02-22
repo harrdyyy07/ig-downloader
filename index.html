@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaSnap | Premium Instagram Downloader</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B3B;
+            --secondary: #FF6B6B;
+            --dark: #0F0F12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #F0F0F0;
+            --text-muted: #A0A0A0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 59, 59, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(131, 58, 180, 0.15), transparent 40%);
+        }
+
+        header {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, var(--primary), #833AB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        main {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .input-container {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .input-container:focus-within {
+            transform: translateY(-2px);
+            border-color: rgba(255, 59, 59, 0.4);
+        }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 15px 25px;
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 15px 35px;
+            border-radius: 18px;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+        }
+
+        .btn-download:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 59, 59, 0.5);
+        }
+
+        .btn-download:active {
+            transform: scale(0.98);
+        }
+
+        /* Results Section */
+        #result {
+            margin-top: 40px;
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card img,
+        .card video {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-preview {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-preview:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-action-download {
+            background: white;
+            color: black;
+        }
+
+        .btn-action-download:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Loading States */
+        #loader {
+            display: none;
+            margin-top: 40px;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        .shimmer {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .features {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .input-container {
+                flex-direction: column;
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .btn-download {
+                width: 100%;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">InstaSnap</div>
+        <p class="tagline">Download Instagram Reels, Posts, and Stories instantly.</p>
+    </header>
+
+    <main>
+        <div class="input-container">
+            <input type="text" id="ig-url" placeholder="Paste Instagram link here..." autocomplete="off">
+            <button class="btn-download" onclick="analyzeLink()">Analyze</button>
+        </div>
+
+        <div id="loader">
+            <div class="shimmer"></div>
+            Searching for media...
+        </div>
+
+        <div id="result">
+            <!-- Dynamic Content -->
+        </div>
+
+        <div class="features">
+            <div class="feature-item">
+                <h3>High Quality</h3>
+                <p>Always get the best resolution available.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Fast Extraction</h3>
+                <p>No waiting, download in seconds.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Free Forever</h3>
+                <p>No hidden costs or subscriptions.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 InstaSnap. For personal use only. <br>
+        <small style="opacity: 0.5;">v1.5.0 - Ready for Vercel Deployment</small>
+    </footer>
+
+    <script>
+        async function analyzeLink() {
+            const urlInput = document.getElementById('ig-url');
+            const url = urlInput.value.trim();
+            const loader = document.getElementById('loader');
+            const resultDiv = document.getElementById('result');
+
+            if (!url) {
+                alert("Please paste a valid Instagram link.");
+                return;
+            }
+
+            // Reset UI
+            resultDiv.style.display = 'none';
+            resultDiv.innerHTML = '';
+            loader.style.display = 'block';
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    const errorMsg = data.details ? `${data.error}\n\nDetails: ${data.details}` : data.error;
+                    throw new Error(errorMsg || 'Something went wrong');
+                }
+
+                displayResults(data.media);
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        function displayResults(mediaFiles) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'grid';
+
+            mediaFiles.forEach(file => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                // Use proxy to bypass CORS/Hotlinking
+                const proxiedUrl = `/api/proxy?url=${encodeURIComponent(file.url)}`;
+                const proxiedThumbnail = file.thumbnail ? `/api/proxy?url=${encodeURIComponent(file.thumbnail)}` : null;
+
+                let preview;
+                if (file.type === 'video') {
+                    preview = document.createElement('video');
+                    preview.src = proxiedUrl;
+                    preview.controls = true;
+                    preview.poster = proxiedThumbnail;
+                    preview.autoplay = false;
+                } else {
+                    preview = document.createElement('img');
+                    preview.src = proxiedUrl;
+                }
+
+                preview.onerror = () => {
+                    preview.style.display = 'none';
+                    const errorMsg = document.createElement('p');
+                    errorMsg.style.padding = '20px';
+                    errorMsg.style.color = '#FF6B6B';
+                    errorMsg.style.fontSize = '0.9rem';
+                    errorMsg.innerText = 'Preview unavailable. You can still try the download button below.';
+                    card.insertBefore(errorMsg, actionsDiv);
+                };
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'card-actions';
+
+                const previewBtn = document.createElement('a');
+                previewBtn.href = proxiedUrl;
+                previewBtn.target = '_blank';
+                previewBtn.className = 'card-btn btn-preview';
+                previewBtn.innerText = 'Preview Full';
+
+                const downloadBtn = document.createElement('a');
+                // Use proxy with dl=1 to trigger direct download
+                downloadBtn.href = `${proxiedUrl}&dl=1`;
+                downloadBtn.className = 'card-btn btn-action-download';
+                downloadBtn.innerText = 'Download Now';
+
+                actionsDiv.appendChild(previewBtn);
+                actionsDiv.appendChild(downloadBtn);
+
+                card.appendChild(preview);
+                card.appendChild(actionsDiv);
+                resultDiv.appendChild(card);
+            });
+        }
+    </script>
+</body>
+
+</html>
