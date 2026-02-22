@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | InstaSnap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B3B;
+            --secondary: #FF6B6B;
+            --dark: #0F0F12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #F0F0F0;
+            --text-muted: #A0A0A0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 59, 59, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(131, 58, 180, 0.1), transparent 40%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), #833AB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <a href="/" class="back-home">← Back to Home</a>
+        <h1>Privacy Policy</h1>
+        <p>Last updated: February 22, 2026</p>
+
+        <h2>1. Information We Collect</h2>
+        <p>InstaSnap does not require user registration. We do not collect personal information such as names, email
+            addresses, or phone numbers. We may collect non-personal information such as browser type, operating system,
+            and IP address for analytical purposes to improve our service.</p>
+
+        <h2>2. Use of Cookies</h2>
+        <p>We use cookies to enhance your experience, remember your preferences, and analyze our traffic. You can choose
+            to disable cookies through your browser settings.</p>
+
+        <h2>3. Third-Party Services</h2>
+        <p>We use third-party tools like Google Analytics and Google AdSense. These services may collect information
+            used to identify you and show personalized ads based on your browsing history.</p>
+
+        <h2>4. Data Security</h2>
+        <p>We take reasonable measures to protect the information we collect from unauthorized access or disclosure.</p>
+
+        <h2>5. Content Ownership</h2>
+        <p>InstaSnap does not host any content. All media is fetched directly from Instagram's servers. Users are
+            responsible for ensuring they have the right to download and use the content.</p>
+
+        <h2>6. Changes to This Policy</h2>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
+            Privacy Policy on this page.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at support@instasnap.demo.</p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | InstaSnap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B3B;
+            --secondary: #FF6B6B;
+            --dark: #0F0F12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #F0F0F0;
+            --text-muted: #A0A0A0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 59, 59, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(131, 58, 180, 0.1), transparent 40%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), #833AB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <a href="/" class="back-home">← Back to Home</a>
+        <h1>Contact Us</h1>
+        <p>Have a question or feedback? We'd love to hear from you. We strive to provide the best service possible and
+            your input helps us improve.</p>
+
+        <div class="contact-info">
+            <p>📧 Email: <span>support@instasnap.demo</span></p>
+            <p>🕒 Response Time: <span>Usually within 24-48 hours</span></p>
+        </div>
+
+        <h2>Reporting Issues</h2>
+        <p>If you encounter any problems while using InstaSnap, please provide as much detail as possible, including the
+            Instagram link you were trying to download and the error message you received.</p>
+
+        <h2>Feedback & Suggestions</h2>
+        <p>We are constantly looking to improve our service. If you have any suggestions for new features or
+            improvements, please don't hesitate to reach out.</p>
+    </div>
+</body>
+
+</html>

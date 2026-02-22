@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | InstaSnap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B3B;
+            --secondary: #FF6B6B;
+            --dark: #0F0F12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #F0F0F0;
+            --text-muted: #A0A0A0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 59, 59, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(131, 58, 180, 0.1), transparent 40%);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), #833AB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <a href="/" class="back-home">← Back to Home</a>
+        <h1>Terms of Service</h1>
+        <p>Last updated: February 22, 2026</p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing and using InstaSnap, you agree to comply with and be bound by these Terms of Service. If you do
+            not agree to these terms, please do not use the service.</p>
+
+        <h2>2. Use of Service</h2>
+        <p>InstaSnap is provided "as is" and "as available". You agree to use the service only for personal,
+            non-commercial purposes. You must not use the service for any illegal or unauthorized purpose.</p>
+
+        <h2>3. Intellectual Property</h2>
+        <p>All trademarks, logos, and service marks displayed on this site are the property of their respective owners.
+            InstaSnap does not claim any ownership over the content downloaded through its service. Users are
+            responsible for respecting the intellectual property rights of content creators.</p>
+
+        <h2>4. Disclaimer of Warranties</h2>
+        <p>InstaSnap makes no warranties, expressed or implied, regarding the reliability, accuracy, or availability of
+            the service. We are not responsible for any damage to your device or loss of data resulting from the use of
+            the service.</p>
+
+        <h2>5. Limitation of Liability</h2>
+        <p>In no event shall InstaSnap be liable for any direct, indirect, incidental, special, or consequential damages
+            arising out of or in connection with your use of the service.</p>
+
+        <h2>6. User Responsibility</h2>
+        <p>You are solely responsible for your use of the service and any consequences that may arise. You agree to
+            indemnify and hold InstaSnap harmless from any claims, damages, or losses resulting from your use of the
+            service.</p>
+
+        <h2>7. Governing Law</h2>
+        <p>These terms shall be governed by and construed in accordance with the laws of your jurisdiction.</p>
+    </div>
+</body>
+
+</html>

@@ -17,6 +17,7 @@
             --glass-border: rgba(255, 255, 255, 0.1);
             --text: #F0F0F0;
             --text-muted: #A0A0A0;
+            --nav-height: 80px;
         }
 
         * {
@@ -32,7 +33,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
         }
 
@@ -49,15 +49,65 @@
                 radial-gradient(circle at 80% 80%, rgba(131, 58, 180, 0.15), transparent 40%);
         }
 
+        /* Navbar */
+        nav {
+            height: var(--nav-height);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(15, 15, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), #833AB4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
         header {
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
-        .logo {
-            font-size: 2.5rem;
+        .logo-main {
+            font-size: 3.5rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -2px;
             background: linear-gradient(45deg, var(--primary), #833AB4);
             -webkit-background-clip: text;
             background-clip: text;
@@ -67,7 +117,7 @@
 
         .tagline {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 300;
         }
 
@@ -75,6 +125,8 @@
             width: 90%;
             max-width: 800px;
             padding: 20px;
+            margin: 0 auto;
+            flex: 1;
         }
 
         .input-container {
@@ -134,7 +186,7 @@
         #result {
             margin-top: 40px;
             display: none;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             animation: fadeInUp 0.5s ease forwards;
         }
@@ -213,6 +265,7 @@
             margin-top: 40px;
             font-weight: 300;
             color: var(--text-muted);
+            text-align: center;
         }
 
         .shimmer {
@@ -237,26 +290,86 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             text-align: center;
+            margin-bottom: 60px;
         }
 
         .feature-item h3 {
-            font-size: 1rem;
-            margin-bottom: 5px;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text);
         }
 
         .feature-item p {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
         }
 
+        /* Footer */
         footer {
-            margin-top: auto;
-            padding: 40px;
+            background: rgba(15, 15, 18, 0.9);
+            border-top: 1px solid var(--glass-border);
+            padding: 60px 20px 30px;
             color: var(--text-muted);
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
             font-size: 0.9rem;
         }
 
-        @media (max-width: 600px) {
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .logo-main {
+                font-size: 2.5rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
             .input-container {
                 flex-direction: column;
                 padding: 20px;
@@ -266,11 +379,6 @@
             .btn-download {
                 width: 100%;
             }
-
-            .features {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
         }
     </style>
 </head>
@@ -278,8 +386,19 @@
 <body>
     <div class="bg-glow"></div>
 
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo">InstaSnap</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about-us.html">About</a>
+                <a href="/contact-us.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
     <header>
-        <div class="logo">InstaSnap</div>
+        <div class="logo-main">InstaSnap</div>
         <p class="tagline">Download Instagram Reels, Posts, and Stories instantly.</p>
     </header>
 
@@ -315,8 +434,32 @@
     </main>
 
     <footer>
-        &copy; 2026 InstaSnap. For personal use only. <br>
-        <small style="opacity: 0.5;">v1.5.1 - Vercel Routing Fixed</small>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>InstaSnap</h4>
+                <p style="font-size: 0.85rem; line-height: 1.6;">The ultimate tool for downloading high-quality
+                    Instagram media. Fast, free, and secure.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="/terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="/disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="/about-us.html">About Us</a></li>
+                    <li><a href="/contact-us.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 InstaSnap. For personal use only. <br>
+            <small style="opacity: 0.5; display: block; margin-top: 10px;">v1.5.2 - Google Ads Compliant Layout</small>
+        </div>
     </footer>
 
     <script>
