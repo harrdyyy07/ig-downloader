@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | InstaSnap</title>
+    <title>About Us | ReelSnatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -96,6 +96,22 @@
         .back-home:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 10px;
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            img {
+                height: 60px !important;
+            }
+        }
     </style>
 </head>
 
@@ -103,12 +119,15 @@
     <div class="bg-glow"></div>
     <div class="container">
         <a href="/" class="back-home">← Back to Home</a>
-        <h1>About Us</h1>
-        <p>Welcome to <strong>InstaSnap</strong>, your premier destination for high-quality Instagram content
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="/logo.png" alt="ReelSnatch Logo" style="height: 80px; margin-bottom: 10px;">
+            <h1>About Us</h1>
+        </div>
+        <p>Welcome to <strong>ReelSnatch</strong>, your premier destination for high-quality Instagram content
             extraction.</p>
 
         <h2>Our Mission</h2>
-        <p>At InstaSnap, we believe in making content accessible for personal enjoyment and creative inspiration. Our
+        <p>At ReelSnatch, we believe in making content accessible for personal enjoyment and creative inspiration. Our
             mission is to provide a fast, reliable, and completely free tool for users to save their favorite Instagram
             moments.</p>
 

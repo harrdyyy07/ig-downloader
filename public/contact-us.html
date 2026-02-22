@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | InstaSnap</title>
+    <title>Contact Us | ReelSnatch</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -104,6 +104,22 @@
         .back-home:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 10px;
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            img {
+                height: 60px !important;
+            }
+        }
     </style>
 </head>
 
@@ -111,18 +127,21 @@
     <div class="bg-glow"></div>
     <div class="container">
         <a href="/" class="back-home">← Back to Home</a>
-        <h1>Contact Us</h1>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="/logo.png" alt="ReelSnatch Logo" style="height: 80px; margin-bottom: 10px;">
+            <h1>Contact Us</h1>
+        </div>
         <p>Have a question or feedback? We'd love to hear from you. We strive to provide the best service possible and
             your input helps us improve.</p>
 
         <div class="contact-info">
-            <p>📧 Email: <span>support@instasnap.demo</span></p>
+            <p>📧 Email: <span>support@reelsnatch.demo</span></p>
             <p>🕒 Response Time: <span>Usually within 24-48 hours</span></p>
         </div>
 
         <h2>Reporting Issues</h2>
-        <p>If you encounter any problems while using InstaSnap, please provide as much detail as possible, including the
-            Instagram link you were trying to download and the error message you received.</p>
+        <p>If you encounter any problems while using ReelSnatch, please provide as much detail as possible, including
+            the Instagram link you were trying to download and the error message you received.</p>
 
         <h2>Feedback & Suggestions</h2>
         <p>We are constantly looking to improve our service. If you have any suggestions for new features or

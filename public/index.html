@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaSnap | Premium Instagram Downloader</title>
+    <title>ReelSnatch | Premium Instagram Downloader</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -73,13 +73,13 @@
         }
 
         .nav-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), #833AB4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
             text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 70px;
         }
 
         .nav-links {
@@ -99,20 +99,43 @@
             color: var(--primary);
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background-color: var(--text);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
         header {
             padding: 60px 20px;
             text-align: center;
         }
 
         .logo-main {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-            background: linear-gradient(45deg, var(--primary), #833AB4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-main img {
+            height: 120px;
+            filter: drop-shadow(0 0 20px rgba(255, 59, 59, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-main img:hover {
+            transform: scale(1.05);
         }
 
         .tagline {
@@ -357,27 +380,106 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .menu-toggle {
+                display: flex;
+                margin-left: 20px;
             }
 
-            .logo-main {
-                font-size: 2.5rem;
+            .nav-container {
+                width: 95%;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(15, 15, 18, 0.98);
+                backdrop-filter: blur(25px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 100px;
+                align-items: center;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-left: 1px solid var(--glass-border);
+                display: flex;
+                z-index: 100;
+                gap: 40px;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            /* Hamburger Animation */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            .logo-main img {
+                height: 120px;
+                /* Slightly larger on mobile as requested */
+                max-width: 80%;
+            }
+
+            .nav-logo img {
+                height: 55px;
+                /* Better fit for 80px nav */
+            }
+
+            nav {
+                height: 80px;
+            }
+
+            main {
+                width: 95%;
+                padding: 10px;
             }
 
             .features {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 25px;
+                margin-top: 50px;
             }
 
             .input-container {
                 flex-direction: column;
-                padding: 20px;
-                border-radius: 20px;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.03);
+            }
+
+            input {
+                padding: 12px;
+                text-align: center;
+                width: 100%;
             }
 
             .btn-download {
                 width: 100%;
+                padding: 18px;
+            }
+
+            #result {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -388,8 +490,15 @@
 
     <nav>
         <div class="nav-container">
-            <a href="/" class="nav-logo">InstaSnap</a>
-            <div class="nav-links">
+            <a href="/" class="nav-logo">
+                <img src="/logo.png" alt="ReelSnatch Logo">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="nav-links">
                 <a href="/">Home</a>
                 <a href="/about-us.html">About</a>
                 <a href="/contact-us.html">Contact</a>
@@ -398,7 +507,9 @@
     </nav>
 
     <header>
-        <div class="logo-main">InstaSnap</div>
+        <div class="logo-main">
+            <img src="/logo.png" alt="ReelSnatch Logo">
+        </div>
         <p class="tagline">Download Instagram Reels, Posts, and Stories instantly.</p>
     </header>
 
@@ -436,7 +547,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <h4>InstaSnap</h4>
+                <h4>ReelSnatch</h4>
                 <p style="font-size: 0.85rem; line-height: 1.6;">The ultimate tool for downloading high-quality
                     Instagram media. Fast, free, and secure.</p>
             </div>
@@ -457,12 +568,29 @@
             </div>
         </div>
         <div class="footer-bottom">
-            &copy; 2026 InstaSnap. For personal use only. <br>
-            <small style="opacity: 0.5; display: block; margin-top: 10px;">v1.5.2 - Google Ads Compliant Layout</small>
+            &copy; 2026 ReelSnatch. For personal use only. <br>
+            <small style="opacity: 0.5; display: block; margin-top: 10px;">v1.6.0 - ReelSnatch Branding</small>
         </div>
     </footer>
 
     <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         async function analyzeLink() {
             const urlInput = document.getElementById('ig-url');
             const url = urlInput.value.trim();
