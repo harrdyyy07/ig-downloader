@@ -343,6 +343,19 @@
                     body: JSON.stringify({ url })
                 });
 
+                // Check if response is JSON and handle 404/Not Found
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await response.text();
+                    console.error('Non-JSON response:', text);
+
+                    // Specific check for Live Server (port 5500)
+                    if (window.location.port === '5500') {
+                        throw new Error('API unreachable. Please run the app using "npm start" and visit http://localhost:5000 instead of using Live Server.');
+                    }
+                    throw new Error('The server returned an invalid response. This usually means the API is not running correctly.');
+                }
+
                 const data = await response.json();
 
                 if (!response.ok) {
@@ -352,7 +365,12 @@
 
                 displayResults(data.media);
             } catch (error) {
-                alert(error.message);
+                // Better error message for network issues
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    alert("Network error: Could not connect to the API. Make sure the backend server is running.");
+                } else {
+                    alert(error.message);
+                }
             } finally {
                 loader.style.display = 'none';
             }

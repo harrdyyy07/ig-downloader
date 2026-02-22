@@ -2,14 +2,45 @@ const express = require('express');
 const cors = require('cors');
 const { instagramGetUrl } = require('instagram-url-direct');
 const instaPriyansh = require('priyansh-ig-downloader');
+const axios = require('axios');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 3000; // Changed to 3000 to avoid conflicts
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+
+// DIAGNOSTIC LOGGING
+console.log('--- Server Diagnostics ---');
+console.log('Current Directory:', __dirname);
+const publicPath = path.join(__dirname, 'public');
+console.log('Public Folder Path:', publicPath);
+const indexHtmlPath = path.join(publicPath, 'index.html');
+console.log('Index HTML Path:', indexHtmlPath);
+
+const fs = require('fs');
+if (fs.existsSync(indexHtmlPath)) {
+    console.log('SUCCESS: index.html exists');
+} else {
+    console.error('ERROR: index.html NOT FOUND at', indexHtmlPath);
+}
+console.log('--------------------------');
+
+// Request Logging Middleware
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
+    next();
+});
+
+app.use(express.static(publicPath));
+
+// Serve the frontend explicitly
+app.get('/', (req, res) => {
+    console.log('Serving index.html for root request');
+    res.sendFile(indexHtmlPath);
+});
 
 // Status check
 app.get('/api/health', (req, res) => {
@@ -90,8 +121,6 @@ app.post('/api/download', async (req, res) => {
     }
 });
 
-const axios = require('axios');
-
 // Proxy endpoint to bypass CORS and referer checks
 app.get('/api/proxy', async (req, res) => {
     const { url, dl } = req.query;
@@ -150,6 +179,13 @@ app.get('/api', (req, res) => {
 });
 
 
+// Catch-all for diagnostics
+app.use((req, res) => {
+    console.error(`404 - Not Found: ${req.method} ${req.url}`);
+    res.status(404).send(`Cannot ${req.method} ${req.path} (Diagnostic: Server is running on port ${PORT})`);
+});
+
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`\n>>> SUCCESS! Your server is running at http://localhost:${PORT}`);
+    console.log('>>> Open that link in your browser to test.\n');
 });

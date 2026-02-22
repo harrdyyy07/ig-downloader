@@ -3,6 +3,7 @@ const cors = require('cors');
 const axios = require('axios');
 const { instagramGetUrl } = require('instagram-url-direct');
 const instaPriyansh = require('priyansh-ig-downloader');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -144,6 +145,11 @@ app.get('/api/proxy', async (req, res) => {
 // Root handler for the /api route itself
 app.get('/api', (req, res) => {
     res.json({ message: 'Welcome to the InstaSnap API. Use /api/download and /api/proxy' });
+});
+
+// Root handler for / (in case hit via functions)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 
